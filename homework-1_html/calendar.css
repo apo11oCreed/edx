@@ -8,7 +8,7 @@ table {
 }
 
 .month-header {
-  background-image: url(https://i.postimg.cc/1Xw67Pj5/Dog-Picture.jpg);
+  background-image: url('https://i.postimg.cc/1Xw67Pj5/Dog-Picture.jpg');
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -80,40 +80,40 @@ ul {
 
 .event.dog-walk {
   border-radius: 5px;
-  color: #10171c;
+  color: #10171C;
   padding: 5px;
   margin: 5px 0;
-  background-color: #a6f4ff;
+  background-color: #A6F4FF;
 }
 
 .event.school {
   border-radius: 5px;
-  color: #10171c;
+  color: #10171C;
   padding: 5px;
   margin: 5px 0;
-  background-color: #ba9ce8;
+  background-color: #BA9CE8;
 }
 
 .event.birthday {
   border-radius: 5px;
-  color: #10171c;
+  color: #10171C;
   padding: 5px;
   margin: 5px 0;
-  background-color: #afffad;
+  background-color: #AFFFAD;
 }
 
 .event.appointment {
   border-radius: 5px;
-  color: #10171c;
+  color: #10171C;
   padding: 5px;
   margin: 5px 0;
-  background-color: #ff7e6d;
+  background-color: #FF7E6D;
 }
 
 .event.holiday {
   border-radius: 5px;
-  color: #10171c;
+  color: #10171C;
   padding: 5px;
   margin: 5px 0;
-  background-color: #e8e193;
+  background-color: #E8E193;
 }
