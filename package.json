@@ -1,0 +1,11 @@
+{
+  "name": "edx",
+  "version": "1.0.0",
+  "description": "This is the hub for work-in-progress and final deliverables for the Programming For The Web With Javascript course.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nelson Correia",
+  "license": "ISC"
+}
