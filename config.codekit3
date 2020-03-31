@@ -54,6 +54,36 @@
 		"sC": 1,
 		"tS": 0
 		},
+	"/homework-3_jquery/calc.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/homework-3_jquery/calc.html",
+		"oF": 0
+		},
+	"/homework-3_jquery/calc.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "/homework-3_jquery/calc-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"/homework-3_jquery/jquery.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "/homework-3_jquery/jquery-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
 	"/node_modules": {
 		"ft": 65536,
 		"oA": 2,
