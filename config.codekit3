@@ -7,7 +7,7 @@
 		"uuidString": "CCC9C740-75A9-4F2D-AD0F-0D13C3DFDD3A"
 		}
 	],
-"creatorBuild": "32001",
+"creatorBuild": "32137",
 "files": {
 	"/.gitignore": {
 		"cB": 0,
@@ -2136,13 +2136,13 @@
 		"autoOutputPathReplace1": "sass",
 		"autoOutputPathReplace2": "css",
 		"autoOutputPathStyle": 0,
+		"compilerType": 1,
 		"createSourceMap": 0,
-		"debugStyle": 0,
 		"decimalPrecision": 10,
+		"emitCharset": 1,
 		"outputStyle": 0,
 		"shouldRunAutoprefixer": 0,
-		"shouldRunBless": 0,
-		"useLibsass": 1
+		"shouldRunBless": 0
 		},
 	"languageDefaultsSLIM": {
 		"autoOutputAction": 0,

@@ -6,11 +6,15 @@ $(window).on('load', function() {
     var display = $('#display'),
         inputNumber = '',
         inputNumbers = [],
-        operationInit = false,
+        evaluated = false,
+        evaluatedContinue = false,
+        newOperand = false,
         operation = '',
         result = '',
         currNo = '',
-        prevNo = '';
+        prevNo = '',
+        lastOperation = '',
+        currentOperation = '';
 
     display.val('');
 
@@ -19,104 +23,153 @@ $(window).on('load', function() {
     $('#equalsButton').on('click', evaluate);
     $('#clearButton').on('click', clearAll);
 
+    var operationObject = {
+        numbers: [],
+        operationInit: false,
+        //newOperand: true,
+        evaluated: false,
+        operationContinued: false,
+        operation: '',
+        operations: []
+    };
+
     function inputHandler() {
-        if (operationInit == true) {
-            console.log('inputNew');
-            console.log('operationInit = ' + operationInit);
+        if (operationObject.evaluated == true) {
+
+            operationObject.numbers = [];
+            operationObject.operations = [];
+
             display.val('');
             display.val(display.val() + $(this).val());
-            operationInit = false;
-        } else {
-            console.log('inputInit');
-            console.log('operationInit = ' + operationInit);
+
+            //operationObject.newOperand = false;
+            //operationObject.operationNew = false;
+            operationObject.evaluated = false;
+
+        } else if (operationObject.operationInit == true) {
+
+            display.val('');
             display.val(display.val() + $(this).val());
+            operationObject.operationInit = false;
+
+        } else {
+            display.val(display.val() + $(this).val());
+            console.log('else');
         }
 
     }
 
     function operationHandler() {
         inputNumber = display.val();
-        inputNumbers.push(inputNumber);
-        console.log(inputNumbers);
-        operationInit = true;
-        if ($(this).attr('id') == 'subtractButton') {
-            if (operation) {
-                currNo = inputNumbers[inputNumbers.length - 1];
-                prevNo = inputNumbers[inputNumbers.length - 2];
-                if (currNo !== 'Infinity') {
+        operation = $(this).attr('id');
+
+        if (inputNumber != '') {
+
+            operationObject.numbers.push(Number(inputNumber));
+
+            if (operationObject.evaluated == true) {
+                console.log('test1');
+
+                operationObject.operations.push(operation);
+
+                operationObject.evaluated = false;
+                operationObject.operationInit = true;
+
+
+
+            } else if (operationObject.evaluated == false && operationObject.operations.length > 0) {
+                console.log('test2');
+
+
+                operationObject.operations.push(operation);
+
+                currentOperation = operationObject.operations[operationObject.operations.length - 2];
+
+                currNo = operationObject.numbers[operationObject.numbers.length - 1];
+                prevNo = operationObject.numbers[operationObject.numbers.length - 2];
+
+                if (currentOperation == 'subtractButton') {
                     result = Number(prevNo) - Number(currNo);
+                } else if (currentOperation == 'addButton') {
+                    result = Number(prevNo) + Number(currNo);
+                } else if (currentOperation == 'multiplyButton') {
+                    result = Number(prevNo) * Number(currNo);
                 } else {
-                    result = 'Infinity';
+                    result = Number(prevNo) / Number(currNo);
                 }
+
                 display.val(result);
+
+                operationObject.numbers.push(result);
+
+                operationObject.operationInit = true;
+
             } else {
-                operation = 'subtract';
+                console.log('test3');
+                operationObject.operations.push(operation);
+                if ($(this).attr('id') == 'subtractButton') {
+                    operationObject.operation = 'subtract';
+                } else if ($(this).attr('id') == 'addButton') {
+                    operationObject.operation = 'addition';
+                } else if ($(this).attr('id') == 'multiplyButton') {
+                    operationObject.operation = 'multiplication';
+                } else {
+                    operationObject.operation = 'division';
+                }
+                operationObject.operationInit = true;
+                console.log('else');
             }
 
-        } else if ($(this).attr('id') == 'addButton') {
-            operation = 'addition';
-        } else if ($(this).attr('id') == 'multiplyButton') {
-            operation = 'multiplication';
+            console.log(operationObject);
+
         } else {
-            operation = 'division';
+            console.log('No numbers entered!');
         }
-        console.log(operation);
     }
 
     function evaluate() {
 
-        inputNumber = display.val();
-        console.log(inputNumbers);
-        console.log('operationInit = ' + operationInit);
-        console.log(operation);
+        if (operationObject.operations.length > 0) {
+            inputNumber = display.val();
 
-        if (inputNumbers.length > 0) {
-            //     inputNumber = display.val();
-            //     inputNumbers.push(inputNumber);
-            inputNumbers.push(inputNumber);
-            if (inputNumbers.length > 1) {
-                inputNumber = display.val();
-                //inputNumbers.push(inputNumber);
-                currNo = inputNumbers[inputNumbers.length - 1];
-                prevNo = inputNumbers[inputNumbers.length - 2];
-                console.log(currNo);
-                console.log(prevNo);
+            operationObject.numbers.push(Number(inputNumber));
 
-                if (currNo !== 'Infinity') {
+            lastOperation = operationObject.operations[operationObject.operations.length - 1];
 
-                    if (operation == 'subtract') {
-                        result = Number(prevNo) - Number(currNo);
-                    } else if (operation == 'addition') {
-                        console.log(operation);
-                        result = Number(prevNo) + Number(currNo);
-                    } else if (operation == 'multiplication') {
-                        console.log(operation);
-                        result = Number(prevNo) * Number(currNo);
-                    } else {
-                        console.log(operation);
-                        result = Number(prevNo) / Number(currNo);
-                    }
-                    display.val(result);
+            currNo = operationObject.numbers[operationObject.numbers.length - 1];
+            prevNo = operationObject.numbers[operationObject.numbers.length - 2];
+
+            if (currNo !== 'Infinity') {
+
+                if (lastOperation == 'subtractButton') {
+                    result = Number(prevNo) - Number(currNo);
+                } else if (lastOperation == 'addButton') {
+                    result = Number(prevNo) + Number(currNo);
+                } else if (lastOperation == 'multiplyButton') {
+                    result = Number(prevNo) * Number(currNo);
                 } else {
-                    display.val('Infinity');
+                    result = Number(prevNo) / Number(currNo);
                 }
+                display.val(result);
+                operationObject.evaluated = true;
             } else {
-                display.val(display.val());
+                display.val('Infinity');
+                operationObject.evaluated = true;
             }
+            console.log(operationObject);
+        } else {
+            console.log('No operations defined.');
         }
 
-        // } else {
-        //     display.val(display.val());
-        // }
     }
 
     function clearAll() {
         inputNumber = '';
-        inputNumbers = [];
+        operationObject.inputNumbers = [];
         result = '';
         display.val('');
-        operationInit = false;
+        operationObject.operationInit = false;
         console.log('clearAll');
-        console.log(inputNumbers);
+        console.log(operationObject.inputNumbers);
     }
 });
