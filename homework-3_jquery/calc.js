@@ -26,10 +26,9 @@ $(window).on('load', function() {
     var operationObject = {
         numbers: [],
         operationInit: false,
-        //newOperand: true,
         evaluated: false,
+        equation: false,
         operationContinued: false,
-        operation: '',
         operations: []
     };
 
@@ -45,16 +44,21 @@ $(window).on('load', function() {
             //operationObject.newOperand = false;
             //operationObject.operationNew = false;
             operationObject.evaluated = false;
+            console.log('test6');
 
-        } else if (operationObject.operationInit == true) {
+        } else if (operationObject.operationInit == true || operationObject.operationContinued == true) {
 
             display.val('');
             display.val(display.val() + $(this).val());
+            operationObject.equation = true;
             operationObject.operationInit = false;
+            operationObject.operationContinued = false;
+            console.log('test4');
+            console.log(operationObject);
 
         } else {
             display.val(display.val() + $(this).val());
-            console.log('else');
+            console.log('test5');
         }
 
     }
@@ -73,7 +77,8 @@ $(window).on('load', function() {
                 operationObject.operations.push(operation);
 
                 operationObject.evaluated = false;
-                operationObject.operationInit = true;
+                operationObject.operationContinued = true;
+                //operationObject.operationInit = true;
 
 
 
@@ -102,19 +107,23 @@ $(window).on('load', function() {
 
                 operationObject.numbers.push(result);
 
-                operationObject.operationInit = true;
+                operationObject.operationContinued = true;
 
             } else {
                 console.log('test3');
-                operationObject.operations.push(operation);
+                //operationObject.operations.push(operation);
                 if ($(this).attr('id') == 'subtractButton') {
-                    operationObject.operation = 'subtract';
+                    operationObject.operations.push('subtractButton');
+                    //operationObject.operation = 'subtract';
                 } else if ($(this).attr('id') == 'addButton') {
-                    operationObject.operation = 'addition';
+                    //operationObject.operation = 'addition';
+                    operationObject.operations.push('addButton');
                 } else if ($(this).attr('id') == 'multiplyButton') {
-                    operationObject.operation = 'multiplication';
+                    operationObject.operations.push('multiplyButton');
+                    //operationObject.operation = 'multiplication';
                 } else {
-                    operationObject.operation = 'division';
+                    operationObject.operations.push('divideButton');
+                    //operationObject.operation = 'division';
                 }
                 operationObject.operationInit = true;
                 console.log('else');
@@ -129,7 +138,8 @@ $(window).on('load', function() {
 
     function evaluate() {
 
-        if (operationObject.operations.length > 0) {
+        if (operationObject.equation == true) {
+
             inputNumber = display.val();
 
             operationObject.numbers.push(Number(inputNumber));
@@ -164,12 +174,16 @@ $(window).on('load', function() {
     }
 
     function clearAll() {
-        inputNumber = '';
-        operationObject.inputNumbers = [];
-        result = '';
         display.val('');
+        inputNumber = '';
+        result = '';
+
+        operationObject.numbers = [];
         operationObject.operationInit = false;
-        console.log('clearAll');
-        console.log(operationObject.inputNumbers);
+        operationObject.evaluated = false;
+        operationObject.operationContinued = false;
+        operationObject.operations = [];
+        operationObject.equation = false;
+        console.log(operationObject);
     }
 });
