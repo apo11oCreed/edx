@@ -27,7 +27,7 @@ $(window).on('load', function() {
         numbers: [],
         operationInit: false,
         evaluated: false,
-        equation: false,
+        operand: false,
         operationContinued: false,
         operations: []
     };
@@ -50,7 +50,7 @@ $(window).on('load', function() {
 
             display.val('');
             display.val(display.val() + $(this).val());
-            operationObject.equation = true;
+            operationObject.operand = true;
             operationObject.operationInit = false;
             operationObject.operationContinued = false;
             console.log('test4');
@@ -138,7 +138,7 @@ $(window).on('load', function() {
 
     function evaluate() {
 
-        if (operationObject.equation == true) {
+        if (operationObject.operand == true) {
 
             inputNumber = display.val();
 
@@ -162,11 +162,38 @@ $(window).on('load', function() {
                 }
                 display.val(result);
                 operationObject.evaluated = true;
+                operationObject.operand = false;
             } else {
                 display.val('Infinity');
                 operationObject.evaluated = true;
             }
             console.log(operationObject);
+            console.log('test7');
+        } else if (operationObject.operand == false && operationObject.operations.length > 0) {
+            inputNumber = display.val();
+
+            //operationObject.numbers.push(Number(inputNumber));
+            if (currNo !== 'Infinity') {
+
+                if (lastOperation == 'subtractButton') {
+                    result = Number(inputNumber) - Number(currNo);
+                } else if (lastOperation == 'addButton') {
+                    result = Number(inputNumber) + Number(currNo);
+                } else if (lastOperation == 'multiplyButton') {
+                    result = Number(inputNumber) * Number(currNo);
+                } else {
+                    result = Number(inputNumber) / Number(currNo);
+                }
+                display.val(result);
+                operationObject.evaluated = true;
+                console.log(inputNumber);
+                console.log(Number(currNo));
+            } else {
+                display.val('Infinity');
+                operationObject.evaluated = true;
+            }
+            console.log(operationObject);
+            console.log('test8');
         } else {
             console.log('No operations defined.');
         }
@@ -183,7 +210,7 @@ $(window).on('load', function() {
         operationObject.evaluated = false;
         operationObject.operationContinued = false;
         operationObject.operations = [];
-        operationObject.equation = false;
+        operationObject.operand = false;
         console.log(operationObject);
     }
 });
