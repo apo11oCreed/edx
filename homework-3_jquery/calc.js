@@ -47,7 +47,6 @@ $(window).on('load', function() {
             operationObject.operationInit = false;
             operationObject.operationContinued = false;
 
-            console.log(operationObject);
             console.log('test2');
 
         } else {
@@ -140,13 +139,15 @@ $(window).on('load', function() {
             console.log(operationObject);
 
         } else {
-
+            display.val(inputNumber);
             console.log('No numbers entered!');
 
         }
     }
 
     function evaluate() {
+
+        inputNumber = display.val();
 
         if (operationObject.operand == true) {
 
@@ -184,10 +185,11 @@ $(window).on('load', function() {
 
             }
 
-            console.log(operationObject);
             console.log('test8');
 
         } else if (operationObject.operationInit == true) {
+
+            display.val(inputNumber);
 
             console.log('No operand defined.');
 
@@ -214,17 +216,11 @@ $(window).on('load', function() {
             } else {
 
                 display.val('Infinity');
-                operationObject.evaluated = true;
 
             }
 
-            console.log(operationObject);
-            console.log('test9');
-
         } else {
-
-            console.log('No operations defined.');
-
+            display.val(inputNumber);
         }
 
     }
