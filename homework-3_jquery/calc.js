@@ -4,12 +4,6 @@
 $(window).on('load', function() {
     console.log('The document is loaded!');
     var display = $('#display'),
-        inputNumber = '',
-        inputNumbers = [],
-        evaluated = false,
-        evaluatedContinue = false,
-        newOperand = false,
-        operation = '',
         result = '',
         currNo = '',
         prevNo = '',
@@ -41,10 +35,9 @@ $(window).on('load', function() {
             display.val('');
             display.val(display.val() + $(this).val());
 
-            //operationObject.newOperand = false;
-            //operationObject.operationNew = false;
             operationObject.evaluated = false;
-            console.log('test6');
+
+            console.log('test1');
 
         } else if (operationObject.operationInit == true || operationObject.operationContinued == true) {
 
@@ -53,17 +46,22 @@ $(window).on('load', function() {
             operationObject.operand = true;
             operationObject.operationInit = false;
             operationObject.operationContinued = false;
-            console.log('test4');
+
             console.log(operationObject);
+            console.log('test2');
 
         } else {
+
             display.val(display.val() + $(this).val());
-            console.log('test5');
+
+            console.log('test3');
+
         }
 
     }
 
     function operationHandler() {
+
         inputNumber = display.val();
         operation = $(this).attr('id');
 
@@ -72,19 +70,30 @@ $(window).on('load', function() {
             operationObject.numbers.push(Number(inputNumber));
 
             if (operationObject.evaluated == true) {
-                console.log('test1');
 
                 operationObject.operations.push(operation);
-
                 operationObject.evaluated = false;
                 operationObject.operationContinued = true;
-                //operationObject.operationInit = true;
 
+                console.log('test4');
 
+            } else if (operationObject.operationInit == true) {
+
+                if ($(this).attr('id') == 'subtractButton') {
+                    operationObject.operations.push('subtractButton');
+                } else if ($(this).attr('id') == 'addButton') {
+                    operationObject.operations.push('addButton');
+                } else if ($(this).attr('id') == 'multiplyButton') {
+                    operationObject.operations.push('multiplyButton');
+                } else {
+                    operationObject.operations.push('divideButton');
+                }
+
+                operationObject.operationInit = true;
+
+                console.log('test5');
 
             } else if (operationObject.evaluated == false && operationObject.operations.length > 0) {
-                console.log('test2');
-
 
                 operationObject.operations.push(operation);
 
@@ -106,33 +115,34 @@ $(window).on('load', function() {
                 display.val(result);
 
                 operationObject.numbers.push(result);
-
                 operationObject.operationContinued = true;
 
+                console.log('test6');
+
             } else {
-                console.log('test3');
-                //operationObject.operations.push(operation);
+
                 if ($(this).attr('id') == 'subtractButton') {
                     operationObject.operations.push('subtractButton');
-                    //operationObject.operation = 'subtract';
                 } else if ($(this).attr('id') == 'addButton') {
-                    //operationObject.operation = 'addition';
                     operationObject.operations.push('addButton');
                 } else if ($(this).attr('id') == 'multiplyButton') {
                     operationObject.operations.push('multiplyButton');
-                    //operationObject.operation = 'multiplication';
                 } else {
                     operationObject.operations.push('divideButton');
-                    //operationObject.operation = 'division';
                 }
+
                 operationObject.operationInit = true;
-                console.log('else');
+
+                console.log('test7');
+
             }
 
             console.log(operationObject);
 
         } else {
+
             console.log('No numbers entered!');
+
         }
     }
 
@@ -160,19 +170,31 @@ $(window).on('load', function() {
                 } else {
                     result = Number(prevNo) / Number(currNo);
                 }
+
                 display.val(result);
+
                 operationObject.evaluated = true;
                 operationObject.operand = false;
+
             } else {
+
                 display.val('Infinity');
+
                 operationObject.evaluated = true;
+
             }
+
             console.log(operationObject);
-            console.log('test7');
+            console.log('test8');
+
+        } else if (operationObject.operationInit == true) {
+
+            console.log('No operand defined.');
+
         } else if (operationObject.operand == false && operationObject.operations.length > 0) {
+
             inputNumber = display.val();
 
-            //operationObject.numbers.push(Number(inputNumber));
             if (currNo !== 'Infinity') {
 
                 if (lastOperation == 'subtractButton') {
@@ -184,24 +206,33 @@ $(window).on('load', function() {
                 } else {
                     result = Number(inputNumber) / Number(currNo);
                 }
+
                 display.val(result);
+
                 operationObject.evaluated = true;
-                console.log(inputNumber);
-                console.log(Number(currNo));
+
             } else {
+
                 display.val('Infinity');
                 operationObject.evaluated = true;
+
             }
+
             console.log(operationObject);
-            console.log('test8');
+            console.log('test9');
+
         } else {
+
             console.log('No operations defined.');
+
         }
 
     }
 
     function clearAll() {
+
         display.val('');
+
         inputNumber = '';
         result = '';
 
@@ -211,6 +242,6 @@ $(window).on('load', function() {
         operationObject.operationContinued = false;
         operationObject.operations = [];
         operationObject.operand = false;
-        console.log(operationObject);
+
     }
 });
