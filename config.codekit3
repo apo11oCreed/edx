@@ -84,6 +84,33 @@
 		"sC": 1,
 		"tS": 0
 		},
+	"/homework-4_react/chooser.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/homework-4_react/chooser.html",
+		"oF": 0
+		},
+	"/homework-4_react/FontChooser.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "/homework-4_react/FontChooser-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"/homework_4": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/homework_4",
+		"oF": 0
+		},
 	"/node_modules": {
 		"ft": 65536,
 		"oA": 2,
