@@ -4,15 +4,25 @@ class AddItem extends Component {
 
   constructor() {
     super();
-    this.state = {
-      newItem:{}
-    }
+    this.handleSubmit.bind(this);
   }
 
   handleSubmit(e) {
       e.preventDefault(); // this prevents the page from reloading -- do not delete this line!
-
+      
       // Implement the rest of this function here!
+      var name=e.target.querySelector('input[type=text]').value;
+      var list=this.props.idName;
+      function addItemThing(e1,e2){
+        var obj={
+          name:e1,
+          list:e2
+        }
+        return obj;
+      }
+      this.setState({newItemName:addItemThing(name,list)},function(){
+        this.props.addItem(this.state.newItemName);
+      });
   }
     
 

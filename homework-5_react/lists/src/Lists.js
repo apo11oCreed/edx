@@ -18,6 +18,7 @@ class Lists extends Component {
     var items = this.props.items;
     var lists = this.props.lists;
     var addItem = this.props.addItem;
+   
     return (
       <div key={uuidv4()}>
       {lists.map(function(listName) {

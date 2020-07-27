@@ -4,7 +4,6 @@ import AddList from './AddList.js';
 import './App.css';
 
 class App extends Component {
-
   constructor() {
     super();
     this.state = {
@@ -12,7 +11,7 @@ class App extends Component {
 	items: {} // this property names of this object are the names of the lists; their values are arrays of the items in each list
     };
   }
-
+  
   /**
    * This function takes the state of an AddList component as its parameter
    * and updates the state of this App component by adding a new entry to the "lists"
@@ -21,6 +20,17 @@ class App extends Component {
    */
   handleAddList(s) {
       // Implement this function!
+      //console.log(test);
+      var newLists=this.state.lists;
+      var newItems=this.state.items;
+
+      newLists.push(s);
+      newItems[s]=[];
+
+      this.setState({
+        lists:newLists,
+        items:newItems
+      });
   }
 
   /**
@@ -33,6 +43,9 @@ class App extends Component {
    */
   handleAddItem(s) {
       // Implement this function!
+      var thisList=this.state.items;
+      thisList[s.list].push({"name":s.name});
+      this.setState({items:thisList});
   }
 
   /**
